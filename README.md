@@ -1,2 +1,2 @@
 # CVE
-This repository contains some of the PoC for the bugs which our researchers have found or PoC which they have written for other vulnerabilities.
+A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
