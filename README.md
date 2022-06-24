@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2021-41073](https://github.com/star-sg/CVE/tree/master/CVE-2021-41073)
+  - Target: **Linux Kernel**
+  - Version: 5.10 through 5.14.6
+  - Exploit Written By: [@junron](https://github.com/junron)
 - [CVE-2021-22204](https://github.com/star-sg/CVE/tree/master/CVE-2021-22204)
   - Target: **ExifTool**
   - Version: 7.44
