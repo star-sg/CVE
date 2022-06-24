@@ -1,0 +1,1 @@
+gcc *.c *.h $(pkg-config fuse --cflags --libs --static) -lpthread -luring -static -o exp
