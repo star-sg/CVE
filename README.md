@@ -25,6 +25,10 @@ A collection of proof-of-concept exploit scripts written by the STAR Labs team f
   - Target: **Google Chrome**
   - Version: Google Chrome 60 - 80
   - Exploit Written By: [Đào Tuấn Linh](https://github.com/kuqadk3)
+- [CVE-2020-6418](https://github.com/star-sg/CVE/blob/master/CVE-2020-6418/CVE-2020-6418-exploit.js)
+  - Target: **Google Chrome**
+  - Version: Google Chrome 60 - 80
+  - Exploit Written By: Daniel Toh Jing En
 - [CVE-2019-16452](https://github.com/star-sg/CVE/tree/master/CVE-2019-16452)
   - Target: **Adobe Acrobat and Reader**
   - Version: 2019.012.20035 and previous
