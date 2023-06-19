@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2023-1829](https://github.com/star-sg/CVE/tree/master/CVE-2023-1829)
+  - Target: ** Linux Kernel**
+  - Version: 5.15.0-25.25
+  - Exploit Written By: [Vu Thi Lan](https://github.com/lanleft)
 - [CVE-2022-2185](https://github.com/star-sg/CVE/tree/master/CVE-2022-2185)
   - Target: **GitLab**
   - Version: GitLab affecting all versions starting from 14.0 prior to 14.10.5, 15.0 prior to 15.0.4, and 15.1 prior to 15.1.1
