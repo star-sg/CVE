@@ -1,0 +1,70 @@
+#ifndef _CLASSIFIERS_H_
+#define _CLASSIFIERS_H_
+
+#include <stdint.h>
+ 
+#define TRIG_HOST "127.0.0.1" // 107.16.25.12 10.2.0.4 101.15.2.12 127.0.0.1
+#define TRIG_PORT 9999
+#define PORT_SERVER 9999
+#define ADDR_SERVER 0x6b10190c // 0x0a020004 0x6b10190c
+#define ADDR_GW 0x6b1019ff
+
+#define ACT_INIT_SIZE NLA_ALIGN(sizeof(struct tc_connmark)+sizeof(struct nlattr)*2)
+#define ACT_OPS_SIZE NLA_ALIGN(ACT_INIT_SIZE+sizeof(struct nlattr)*2 + NLA_ALIGN(9))
+#define ACT_SIZE NLA_ALIGN(ACT_OPS_SIZE+sizeof(struct nlattr))
+#define EXTS_SIZE NLA_ALIGN(ACT_SIZE+sizeof(struct nlattr)+sizeof(struct nlattr)*4+4*4)
+#define CLS_SIZE NLA_ALIGN(sizeof(struct nlmsghdr)+sizeof(struct tcmsg) + sizeof(struct nlattr) + 8 + sizeof(struct nlattr) + 4 + EXTS_SIZE + 256)
+
+
+#define LINKDATA_SIZE NLA_ALIGN(sizeof(struct nlattr)*3 + 4*3)
+#define LINKINFO_SIZE NLA_ALIGN(sizeof(struct nlattr) + 8)
+#define LINK_SIZE NLA_ALIGN(sizeof(struct nlmsghdr) + sizeof(struct ifinfomsg)+ LINKINFO_SIZE + sizeof(struct nlattr) + 12 + 256)
+
+#define BUF_SIZE 8192
+
+#define DSMARK_SIZE (NLA_ALIGN(sizeof(uint16_t) + sizeof(struct nlattr))*2 + sizeof(struct nlattr))
+#define QDISC_SIZE NLA_ALIGN(sizeof(struct nlmsghdr) + sizeof(struct tcmsg) + sizeof(struct nlattr) + NLA_ALIGN(10) + sizeof(struct nlattr) + 4 + DSMARK_SIZE + 256)
+
+#define ADDR_SIZE NLA_ALIGN(sizeof(struct nlmsghdr) + sizeof(struct ifaddrmsg) + sizeof(struct nlattr)*2 + 4*2 + 256)
+
+
+#define ADD_ROUTE NLA_ALIGN(sizeof(struct nlmsghdr) + sizeof(struct rtmsg) + sizeof(struct nlattr)*2 + 4*2 + 256)
+
+#define ADD_CLASS NLA_ALIGN(sizeof(struct nlmsghdr) + sizeof(struct rtmsg) + sizeof(struct nlattr)*2 + 4*2 + 256)
+
+/* Qdisc */
+void rt_newqdisc(int, unsigned int, unsigned int);
+
+/* Class */
+void rt_getclass(int, unsigned int);
+void rt_addclass(int, unsigned int, unsigned int);
+void rt_delclass(int, unsigned int, unsigned int);
+
+/* cls_tcindex */
+void rt_addfilter(int, unsigned int, unsigned int, unsigned int);
+void rt_add_flow_filter(int, unsigned int, unsigned int);
+void rt_getfilter(int, unsigned int);
+void rt_setfilter(int, unsigned int);
+void rt_delfilter(int, unsigned int, unsigned int);
+
+void classify_tcindex();
+void start_echo_sv();
+
+/* chain */
+void rt_delchain(int, unsigned int);
+
+/* rtnetlink */
+int rt_getlink(int, char*);
+void rt_newlink(int, char*);
+void rt_dellink(int, char*);
+void rt_setlink(int, unsigned int);
+
+/* inet */
+void inet_newaddr(int,  unsigned int, unsigned int);
+void inet_dumpaddr(int,  unsigned int);
+
+/* route */
+void rt_addroute(int);
+void rt_cloneroute(int, unsigned int);
+
+#endif /* _CLASSIFIERS_H_ */
