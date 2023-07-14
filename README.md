@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2023-3514](https://github.com/star-sg/CVE/tree/master/CVE-2023-3514)
+  - Target: **Razer Central**
+  - Version: Razer Central 7.11.0.558 and below
+  - Exploit Written By: [Phan Thanh Duy](https://github.com/zuypt)
 - [CVE-2023-1829](https://github.com/star-sg/CVE/tree/master/CVE-2023-1829)
   - Target: **Linux Kernel**
   - Version: 5.15.0-25.25
