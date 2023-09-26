@@ -3,7 +3,7 @@ A collection of proof-of-concept exploit scripts written by the STAR Labs team f
 
 - [CVE-2023-31248](https://github.com/star-sg/CVE/tree/master/CVE-2023-31248)
   - Target: **Linux Kernel**
-  - Version: v5.9-rc1
+  - Version: Ubuntu kernel version 6.2.0-20 generic
   - Exploit Written By: [Cherie-Anne Lee](https://github.com/KaligulaArmblessed)
 - [CVE-2023-3514](https://github.com/star-sg/CVE/tree/master/CVE-2023-3514)
   - Target: **Razer Central**
