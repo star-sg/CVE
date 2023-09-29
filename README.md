@@ -17,6 +17,10 @@ A collection of proof-of-concept exploit scripts written by the STAR Labs team f
   - Target: **Linux Kernel**
   - Version: 5.15.0-25.25
   - Exploit Written By: [Vu Thi Lan](https://github.com/lanleft)
+- [CVE-2022-46164](https://github.com/star-sg/CVE/tree/master/CVE-2022-46164)
+  - Target: **NodeBB**
+  - Version: < v2.8.1
+  - Exploit Written By: [River Koh](https://github.com/oceankoh)
 - [CVE-2022-2185](https://github.com/star-sg/CVE/tree/master/CVE-2022-2185)
   - Target: **GitLab**
   - Version: GitLab affecting all versions starting from 14.0 prior to 14.10.5, 15.0 prior to 15.0.4, and 15.1 prior to 15.1.1
