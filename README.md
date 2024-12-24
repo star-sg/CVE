@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2024-30085](https://github.com/star-sg/CVE/tree/master/CVE-2024-30085)
+  - Target: **Windows Cloud Files Mini Filter Driver**
+  - Version: Windows 11 23H2
+  - Exploit Written By: [Cherie-Anne Lee](https://github.com/KaligulaArmblessed)
 - [CVE-2023-31248](https://github.com/star-sg/CVE/tree/master/CVE-2023-31248)
   - Target: **Linux Kernel**
   - Version: Ubuntu kernel version 6.2.0-20 generic
