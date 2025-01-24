@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2024-26230](https://github.com/star-sg/CVE/tree/master/CVE-2024-26230)
+  - Target: **Windows Telephony Server**
+  - Version: Windows 11 23H2
+  - Exploit Written By: [Đào Tuấn Linh](https://github.com/kuqadk3)
 - [CVE-2024-30085](https://github.com/star-sg/CVE/tree/master/CVE-2024-30085)
   - Target: **Windows Cloud Files Mini Filter Driver**
   - Version: Windows 11 23H2
