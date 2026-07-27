@@ -1,6 +1,10 @@
 # CVE
 A collection of proof-of-concept exploit scripts written by the STAR Labs team for various CVEs that they discovered or found by others.
 
+- [CVE-2026-53264](https://github.com/star-sg/CVE/tree/master/CVE-2026-53264)
+  - Target: **Linux Kernel**
+  - Version: CentOS 9 kernel version 5.14.0-721
+  - Exploit Written By: [Lee Jia Jie](https://github.com/mkofdwu)
 - [CVE-2025-29824](https://github.com/star-sg/CVE/tree/master/CVE-2025-29824)
   - Target: **Windows Common Log File System Driver**
   - Version: Windows 11 23H2
